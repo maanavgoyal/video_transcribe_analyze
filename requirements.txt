@@ -1,0 +1,4 @@
+anthropic
+openai-whisper==20231117
+python-dotenv==1.0.0
+numpy<2
