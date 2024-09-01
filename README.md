@@ -85,3 +85,6 @@ If you encounter issues with package installation or compatibility:
 3. Ensure you have FFmpeg installed and added to your system PATH.
 
 4. If you're using a GPU and encounter CUDA-related issues, ensure that your CUDA toolkit version is compatible with the installed PyTorch version.
+
+## Credit
+Project idea from [Divide-By-0](https://github.com/Divide-By-0/)
