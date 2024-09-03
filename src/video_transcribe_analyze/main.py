@@ -23,16 +23,19 @@ def analyze_content(transcript):
 
     {transcript}
 
-    Go through the transcript below and flag out any politically incorrect content like swear words, specific incidents 
-    
-    with personal information which may be without the consent of the thing in question and any other content that can be used against the person.
+    You are an assistant who is very good at analyzing content for swear words, personal information, specific incidents, sensitive information.
 
-    Also return the exact sentences which are to be flagged along with the reason"""
+    Go through the transcript and flag out swear words, specific incidents, personal information,  
+    
+    statements that show certain places or people in bad light.
+
+    Also, return the exact sentences which are to be flagged along with the reason
+"""
 
     message = client.messages.create(
         model="claude-3-5-sonnet-20240620",
         max_tokens=8192,
-        system="You are an assistant who is very good at analyzing content for personal information, politically incorrect content, sensitive information, or swear words.",
+        # system="You are an assistant who is very good at analyzing content for personal information, politically incorrect content, sensitive information, or swear words.",
         messages=[
             {
                 "role": "user",
