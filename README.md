@@ -87,4 +87,4 @@ If you encounter issues with package installation or compatibility:
 4. If you're using a GPU and encounter CUDA-related issues, ensure that your CUDA toolkit version is compatible with the installed PyTorch version.
 
 ## Credit
-Project idea from [Divide-By-0](https://github.com/Divide-By-0/)
+Project idea from [Divide-By-0](https://github.com/Divide-By-0/) and [MIT SOUL](http://soul.mit.edu/)

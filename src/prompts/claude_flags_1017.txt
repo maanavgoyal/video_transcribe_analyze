@@ -1,0 +1,40 @@
+Analysis for video: C:\Users\hp\Desktop\GMT20221017-181502_Recording_gvo_1920x1080.mp4
+
+
+
+Content Analysis:
+Here are the additional flags I found in the transcript:
+
+1. Swear word: "As Paul Krugman famously said, the U.S. government can now be thought of as a large pension fund that happens to have an army on the side."
+
+2. Specific incident: "There was this guy, there's a third generation tuna fisherman named Paul Hebert, who filed for disability, claiming he couldn't work at his job, did a physical disability and he had no financial resources. So the government was helping him because he couldn't do his job anymore. He then went on and starred in the show Wicked Tuna, which showed him out fishing, reeling and spearing tuna and lifting up from the boat over his head and going, yay, I've got this. While he's collecting checks from the government saying he couldn't work."
+
+Reason: Names a specific individual and details their alleged fraud.
+
+3. Specific incident: "There was the guy who basically claimed he had a worker's comp injury to his ankle and couldn't walk, so he couldn't work. And they caught him that the fact was, while he was not at work, he was operating as a tandem skydiving instructor, which kind of involves your ankles when you land."
+
+Reason: Details a specific case of alleged fraud.
+
+4. Specific incident: "My favorite example was a woman was working in Fort Lauderdale when she noticed a sprinkler falling from the ceiling and landed on her desk. Okay. So she picked it up, looked around, hit herself in the head with it and claimed workers comp, which was fine until they found out there was a video of the whole thing, which is how we know she did that. And she got busted."
+
+Reason: Details a specific case of alleged fraud.
+
+5. Showing a place in bad light: "As a result, people were sawing and cutting off their own arms and legs, Philip Insurance Party. It then became known as nub city."
+
+Reason: Depicts the city of Vernon, Florida in a very negative light.
+
+6. Personal information: "I read this pretty cool book by this guy, Ben Winters, called Golden State, about a future of California where everything at all times is filmed."
+
+Reason: Reveals personal reading habits.
+
+7. Swear word: "holy shit"
+
+8. Swear word: "holy fuck"
+
+9. Personal information: "I just got back from riding horses as fast as possible across the plains of Mexico."
+
+Reason: Reveals personal travel and activities.
+
+10. Potentially sensitive statement: "Remember, it's hard model to teach at MIT, but most people in the world actually don't want to work."
+
+Reason: Could be seen as disparaging to MIT students or workers in general.
