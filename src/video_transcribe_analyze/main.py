@@ -4,12 +4,16 @@ import whisper
 import torch
 from anthropic import Anthropic
 from dotenv import load_dotenv
+import google.generativeai as genai
+import openai
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Get API key from environment variable
+# Get API keys from environment variables
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 def transcribe_video(video_path):
     # Create a filename for the transcript
@@ -36,8 +40,7 @@ def read_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
-def analyze_content(transcript):
-    client = Anthropic(api_key=ANTHROPIC_API_KEY)
+def analyze_content(transcript, llm_choice):
     example_flags = read_file(r"C:\Users\hp\video_transcribe_analyze\src\prompts\human_flags_1017.txt")
     claude_flags = read_file(r"C:\Users\hp\video_transcribe_analyze\src\prompts\claude_flags_1017.txt")
     example_transcript = read_file(r"C:\Users\hp\video_transcribe_analyze\src\prompts\transcript_1017.txt")
@@ -77,27 +80,43 @@ def analyze_content(transcript):
 
     """
 
+    prompt = f"{prompt1}\n\n{prompt2}\n\n{prompt3}\n\n{prompt4}"
+
+    if llm_choice == "anthropic":
+        return analyze_with_anthropic(prompt)
+    elif llm_choice == "gemini":
+        return analyze_with_gemini(prompt)
+    elif llm_choice == "openai":
+        return analyze_with_openai(prompt)
+    else:
+        raise ValueError("Invalid LLM choice. Choose 'anthropic', 'gemini', or 'openai'.")
+
+def analyze_with_anthropic(prompt):
+    client = Anthropic(api_key=ANTHROPIC_API_KEY)
     message = client.messages.create(
         model="claude-3-5-sonnet-20240620",
         max_tokens=8192,
-        system = "You are an extremely sensitive assistant who is very good at finding swear words, personal information, specific incidents, sensitive information in text.",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt1+prompt2+prompt4
-            },
-            # {
-            #     "role": "assistant",
-            #     "content": prompt3
-            # },
-            # {
-            #     "role": "user",
-            #     "content": prompt4
-            # },
-
-        ]
+        system="You are an extremely sensitive assistant who is very good at finding swear words, personal information, specific incidents, sensitive information in text.",
+        messages=[{"role": "user", "content": prompt}]
     )
     return message.content[0].text
+
+def analyze_with_gemini(prompt):
+    genai.configure(api_key=GOOGLE_API_KEY)
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content(prompt)
+    return response.text
+
+def analyze_with_openai(prompt):
+    client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an extremely sensitive assistant who is very good at finding swear words, personal information, specific incidents, sensitive information in text."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response.choices[0].message.content
 
 def write_analysis_to_file(video_path, transcript, analysis):
     # Create a filename based on the input video name
@@ -111,23 +130,21 @@ def write_analysis_to_file(video_path, transcript, analysis):
     
     return output_filename
 
-def main(video_path):
-    if not ANTHROPIC_API_KEY:
-        raise ValueError("Anthropic API key not found. Please set it in your .env file.")
-    
+def main(video_path, llm_choice):
     if not os.path.exists(video_path):
         raise FileNotFoundError(f"The video file '{video_path}' does not exist.")
     
     # transcript = transcribe_video(video_path)
     transcript = read_file(r"C:\Users\hp\video_transcribe_analyze\1003_transcript.txt")
-    analysis = analyze_content(transcript)
+    analysis = analyze_content(transcript, llm_choice)
     output_file = write_analysis_to_file(video_path, transcript, analysis)
 
 def cli():
     parser = argparse.ArgumentParser(description="Transcribe and analyze a video.")
     parser.add_argument("video_path", type=str, help="Path to the video file")
+    parser.add_argument("--llm", type=str, choices=["anthropic", "gemini", "openai"], default="anthropic", help="Choose the LLM to use for analysis")
     args = parser.parse_args()
-    main(args.video_path)
+    main(args.video_path, args.llm)
 
 if __name__ == "__main__":
     cli()

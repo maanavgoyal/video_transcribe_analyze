@@ -1,11 +1,11 @@
 # Video Transcribe and Analyze
 
-This project transcribes video content using Hugging Face's Transformers library (with Whisper model) and analyzes the transcript for politically incorrect or sensitive information using Anthropic's Claude 3.5 Sonnet.
+This project transcribes video content using Hugging Face's Transformers library (with Whisper model) and analyzes the transcript for politically incorrect or sensitive information using various LLMs (Anthropic's Claude, Google's Gemini, or OpenAI's GPT).
 
 ## Features
 
 - Transcribe video files using Hugging Face's Transformers (Whisper model)
-- Analyze transcripts for sensitive content using Claude 3.5 Sonnet
+- Analyze transcripts for sensitive content
 - Write analysis results to a text file
 - Easy-to-use command-line interface
 
@@ -42,7 +42,7 @@ This project transcribes video content using Hugging Face's Transformers library
    ```
    Then retry the installation.
 
-4. Set up your Anthropic API key:
+4. Set up your API keys:
    - Create a copy of the `.env.example` file and name it `.env`:
      - For Windows:
        ```
@@ -55,6 +55,8 @@ This project transcribes video content using Hugging Face's Transformers library
    - Open the `.env` file and replace `your_api_key_here` with your actual Anthropic API key:
      ```
      ANTHROPIC_API_KEY=your_actual_api_key
+     GOOGLE_API_KEY=your_google_api_key
+     OPENAI_API_KEY=your_openai_api_key
      ```
 
 ## Usage
@@ -63,13 +65,16 @@ Run the script with a video file as an argument:
 
 - For Windows:
   ```
-  python src\video_transcribe_analyze\main.py path\to\your\video.mp4
+  python src\video_transcribe_analyze\main.py path\to\your\video.mp4 --llm=anthropic
   ```
 
 - For macOS and Linux:
   ```
-  python src/video_transcribe_analyze/main.py /path/to/your/video.mp4
+  python src/video_transcribe_analyze/main.py /path/to/your/video.mp4 --llm=gemini
   ```
+
+
+Available LLM options: `anthropic`, `gemini`, `openai`
 
 The script will create a text file in the current directory with the transcript and analysis results. The filename will be `[original_video_name]_analysis.txt`.
 
